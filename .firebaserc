@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "productivity-planner-sta-1be5a",
+    "development": "productivity-planner-dev-b7f93",
+    "staging": "productivity-planner-sta-1be5a",
+    "production": "productivity-planner-pro-a09ad"
+  },
+  "targets": {},
+  "etags": {}
+}
