@@ -17,11 +17,23 @@ interface FirebaseResponseRegister{
 export class AuthenticationService {
   readonly #http = inject(HttpClient);
   
-  register(email: string, password: string): Observable<FirebaseResponseRegister> {
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseConfig.apiKey}`
+  register(
+    email: string, 
+    password: string
+  ): Observable<FirebaseResponseRegister> {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseConfig.apiKey}`;
     const body = { email, password, returnSecureToken: true };
     
     return this.#http.post<FirebaseResponseRegister>(url, body)
+  }
+
+  login(email: string, password: string): Observable<unknown> {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`;
+    const body = { email, password, returnSecureToken: true };
+  
+
+    return this.#http.post<unknown>(url, body)
+    
   }
 }
 
