@@ -36,6 +36,10 @@ jobs:
       #- name: Audit Signature
         #run: npm audit signatures
 
+        # Linter
+      - name: Lint
+        run: npm run lint        
+
       # Set environment variables
       - name: Create environment file
         run: |
@@ -43,10 +47,6 @@ jobs:
           echo "Creating production environment file..."
           echo "${{ secrets.FIREBASE_CONFIG }}" > src/environments/environment.ts
           cat src/environments/environment.ts 
-          
-      # Linter
-      - name: Lint
-        run: npm run lint
 
       # Tests
       - name: Test
