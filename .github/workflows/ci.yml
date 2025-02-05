@@ -49,7 +49,7 @@ jobs:
       
       # Tests
       - name: Test
-        run: npm run test:ci
+        run: npm run test
 
       # Build
       - name: Build
