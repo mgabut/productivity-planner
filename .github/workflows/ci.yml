@@ -38,19 +38,18 @@ jobs:
 
         # Linter
       - name: Lint
-        run: npm run lint        
+        run: npm run lint 
+        
+      # Tests
+      - name: Test
+        run: npm run test
 
       # Set environment variables
       - name: Create environment file
         run: |
-          mkdir -p src/environments
+          mkdir environments
           echo "Creating production environment file..."
-          echo "${{ secrets.FIREBASE_CONFIG }}" > src/environments/environment.ts
-          cat src/environments/environment.ts 
-
-      # Tests
-      - name: Test
-        run: npm run test
+          echo "${{ secrets.FIREBASE_CONFIG }}" >> environments/environment.ts
 
       # Build
       - name: Build
