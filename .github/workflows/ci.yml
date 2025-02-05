@@ -29,8 +29,8 @@ jobs:
         run: npm clean-install
 
       # Audit de sécurité
-      #- name: Audit
-        #run: npm audit
+      - name: Audit
+        run: npm audit
 
       # Vérification de la signature des audits
       #- name: Audit Signature
@@ -40,16 +40,16 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      # Tests
-      - name: Test
-        run: npm run test:ci
-
       # Set environment variables
       - name: Create environment file
         run: |
-          mkdir environments
+          mkdir src/environments
           echo "Creating production environment file..."
-          echo "${{ secrets.FIREBASE_CONFIG }}" >> environments/environment.ts
+          echo "${{ secrets.FIREBASE_CONFIG }}" >> src/environments/environment.ts
+      
+      # Tests
+      - name: Test
+        run: npm run test:ci
 
       # Build
       - name: Build
