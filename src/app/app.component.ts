@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthenticationService } from './core/authentication.service';
-import { switchMap } from 'rxjs';
+/* import { AuthenticationService } from './core/authentication.service';
+import { switchMap } from 'rxjs'; */
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs';
 export class AppComponent {
   title = 'productivity-planner';
 
-  readonly #authenticationService = inject(AuthenticationService)
+  /* readonly #authenticationService = inject(AuthenticationService)
 
   onLogin(){
     const email = 'john.doe@gmail.com'
@@ -24,5 +24,5 @@ export class AppComponent {
         return this.#authenticationService.save(email, localId, idToken)
       })
     ).subscribe((response)=> console.log(response))
-  }
+  } */
 }
