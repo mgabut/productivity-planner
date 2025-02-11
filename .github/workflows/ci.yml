@@ -17,6 +17,11 @@ jobs:
       # Vérification du dépôt
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Check Node.js and npm version
+        run: |
+          node -v
+          npm -v
 
       # Configuration de Node.js
       - name: Set up Node.js
