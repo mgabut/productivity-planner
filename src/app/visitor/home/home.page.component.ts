@@ -8,4 +8,7 @@ import { HomeBannerDumbComponent } from './home-banner/home-banner.dumb.componen
 })
 export class HomePageComponent {
 
+  onBannerClicked(){
+    console.log('Banner Clicked')
+  }
 }
