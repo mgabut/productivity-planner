@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FeatureCardList } from './homepage-feature-card-list.interface';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-homepage-feature-card-list',
-  imports: [ MatIconModule],
   templateUrl: './homepage-feature-card-list.dumb.component.html',
   styleUrl: './homepage-feature-card-list.dumb.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
