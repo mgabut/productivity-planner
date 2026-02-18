@@ -1,34 +1,33 @@
 import { computed, inject } from "@angular/core";
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
-import { AuthenticationService } from "../authentication.service";
+import { User, Visitor } from "../entity/user.interface";
+import { RegisterUserUseCaseService } from "../use-case/register-user.use-case.service";
 
 interface UserState {
-    username: string,
-    email: string,
-  };
-
+  user: User | undefined
+}
 
 export const UserStore = signalStore(
     { providedIn : 'root'},
     withState<UserState>({
-        username: '',
-        email: '',
+      user: undefined
     }),
 
     withComputed((store) => {
 
       const isGoogleUser = computed(() => 
-        store.email().endsWith('@google.com'))
+        store.user()?.email.endsWith('@google.com'))
       
       return {isGoogleUser}
     }),
     
-    withMethods((store, authenticationService = inject(AuthenticationService)) => ({
-      register(email: string, password: string):void {
-        authenticationService.register(email, password).subscribe(
-          (response) => {
-            patchState(store, {email: response.userId})
-          } 
-      )}
-    }))
+    withMethods(
+      (store, registerUserUseCase = inject(RegisterUserUseCaseService)) => {
+        const register = (visitor: Visitor): void => {
+          registerUserUseCase.execute(visitor).then((user) => {
+            patchState(store, { user} );
+          })
+        }
+        return {register};
+      })
 );

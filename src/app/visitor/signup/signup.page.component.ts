@@ -1,6 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../core/authentication.service';
+import { UserStore } from '../../core/store/user.store';
+import { Visitor } from '../../core/entity/user.interface';
 
 @Component({
   imports: [FormsModule],
@@ -8,6 +10,7 @@ import { AuthenticationService } from '../../core/authentication.service';
   styleUrl: './signup.page.component.scss'
 })
 export class SignupPageComponent {
+  readonly store = inject(UserStore);
   readonly authenticationService = inject(AuthenticationService);
 
   readonly name = signal('');
@@ -21,11 +24,11 @@ export class SignupPageComponent {
 
   onSubmit() {
     console.log('Form submitted');
-
-    this.authenticationService
-      .register(this.email(), this.password())
-      .subscribe((response) => {
-        console.log('User registered', response.userId);
-      })
+    const visitor: Visitor = {
+      name: this.name(),
+      email: this.email(),
+      password: this.password(),
+    };
+    this.store.register(visitor);
   }
 }
